@@ -1,0 +1,5 @@
+requests
+beautifulsoup4
+mecab-python3
+gensim == 3.8.1
+janome == 0.3.10

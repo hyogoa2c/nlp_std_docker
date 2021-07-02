@@ -1,0 +1,37 @@
+FROM python:3.7
+
+# 必要なパッケージを記載
+RUN apt update && apt install --no-install-recommends -y \
+    wget git curl zsh vim\
+    && apt-get autoremove -y \
+    && apt clean
+
+    # zshの実行
+RUN zsh
+
+# zsh用に環境変数の設定
+ENV SHELL /usr/bin/zsh
+# mecab関係のインストール
+RUN apt-get install -y mecab mecab-ipadic-utf8 libmecab-dev
+
+# Python必要なモジュールのインストール
+RUN pip install --upgrade setuptools
+ADD requirements.txt ./tmp/requirements.txt
+RUN pip install -r ./tmp/requirements.txt
+
+# install jupyterlab & extentions
+RUN pip install --upgrade --no-cache-dir \
+    'jupyterlab~=3.0' \
+    jupyterlab_code_formatter \
+    jupyterlab_theme_solarized_dark \
+    jupyterlab-lsp \
+    yapf \
+    'python-lsp-server[all]' \
+    && rm -rf ~/.cache/pip \
+RUN jupyter labextension install \
+      @ryantam626/jupyterlab_code_formatter \
+      @jupyterlab/toc \
+      @AllanChain/jupyterlab-theme-solarized-dark \
+    && jupyter serverextension enable --py jupyterlab_code_formatter
+
+WORKDIR /home/work/
