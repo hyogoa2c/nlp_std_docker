@@ -5,12 +5,12 @@ services:
     build:
       context: .
       dockerfile: Dockerfile.jupyter
-    image: nlp-text
-    container_name: nlp-text
+    image: nlp-std
+    container_name: nlp-std
     environment:
       - JUPYTER_ENABLE_LAB=yes
     volumes:
-      - ".:/home/work"
+      - "./work:/home/work"
       - ".jupyter:/root/.jupyter"
     ports:
     - "8080:8080"
