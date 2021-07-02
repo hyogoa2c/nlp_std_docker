@@ -1,1 +1,2 @@
-# nlp_std_docker
+# NLP Docker
+This is my standard docker projct for NLP
