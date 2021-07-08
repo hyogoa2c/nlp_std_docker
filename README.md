@@ -1,2 +1,4 @@
 # NLP Docker
-This is my standard docker projct for NLP
+
+This is my standard docker project for NLP
+
